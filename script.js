@@ -18,11 +18,19 @@ function displayBook() {
     container.innerHTML = '';
     const tblContainer = document.querySelector("#tbl-container");
     tblContainer.innerHTML = '';
+    tblContainer.innerHTML = `
+        <thead>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Page Count</th>
+            <th>Read</th>
+        </thead>
+    `;
 
     myLibrary.forEach(item => {
         const tableRow = document.createElement("tr");
         tableRow.innerHTML = `
-            <th>${item.title}</th>
+            <td>${item.title}</th>
             <td>${item.author}</td>
             <td>${item.pages}</td>
             <td>${item.read}</td>
