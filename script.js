@@ -17,9 +17,13 @@ const container = document.querySelector("#container");
 function displayBook() {
     container.innerHTML = '';
     const tblContainer = document.querySelector("#tbl-container");
+    tblContainer.innerHTML = '';
 
+    const bookRows = tblContainer.querySelectorAll("tr.book-row");
+    bookRows.forEach(row => row.remove);
     myLibrary.forEach(item => {
         const tableRow = document.createElement("tr");
+        tableRow.className = "book-row"
         tableRow.innerHTML = `
             <td>${item.title}</th>
             <td>${item.author}</td>
@@ -42,8 +46,6 @@ function addBookToLibrary (title, author, pages, read) {
 
 const newBookBtn = document.getElementById("newBook");
 const bookDialog = document.getElementById("bookDialog");
-const selectEl = bookDialog.querySelector("select");
-const inputText = bookDialog.querySelector("input");
 const confirmBtn = bookDialog.querySelector("#confirmBtn");
 
 
@@ -69,5 +71,4 @@ confirmBtn.addEventListener("click", (event) => {
     else {
         alert("Please provide at least a title and author")
     }
-    //bookDialog.close(selectEl.value);
 });
