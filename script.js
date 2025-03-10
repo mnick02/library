@@ -33,10 +33,41 @@ function displayBook() {
 }
 
 
-
 function addBookToLibrary (title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     console.log(myLibrary);
     displayBook();
 }
+
+const newBookBtn = document.getElementById("newBook");
+const bookDialog = document.getElementById("bookDialog");
+const selectEl = bookDialog.querySelector("select");
+const inputText = bookDialog.querySelector("input");
+const confirmBtn = bookDialog.querySelector("#confirmBtn");
+
+
+newBookBtn.addEventListener("click", () => {
+    bookDialog.showModal();
+});
+
+confirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").value;
+
+    if (title && author) {
+        addBookToLibrary(title, author, pages, read);
+
+        document.getElementById("title").value = "";
+        document.getElementById("author").value = "";
+        document.getElementById("pages").value = "";
+        document.getElementById("read").value = "";
+    }
+    else {
+        alert("Please provide at least a title and author")
+    }
+    //bookDialog.close(selectEl.value);
+});
