@@ -84,18 +84,16 @@ function toggleStatus(id) {
     const bookIndex = myLibrary.findIndex(book => book.id === id);
 
     if (bookIndex !== -1) {
-        myLibrary.forEach(item => {
-            if (item.read === "Yes") {
-                item.read = "No";
-                displayBook();
-                console.log(item.read);
-            }
-            else if (item.read === "No") {
-                item.read = "Yes";
-                displayBook();
-                console.log(item.read);
-            }
-        });
+        const book = myLibrary[bookIndex];
+
+        if (book.read === "Yes") {
+            book.read = "No";
+        }
+        else if (book.read === "No") {
+            book.read = "Yes";
+        }
+
+        displayBook();
     }
 }
 
