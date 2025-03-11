@@ -34,7 +34,10 @@ function displayBook() {
             <td>${item.author}</td>
             <td>${item.pages}</td>
             <td>${item.read}</td>
-            <td><button class="remove" data-id="${item.id}">Remove</button></td>
+            <td>
+                <button class="remove" data-id="${item.id}">Remove</button>
+                <button class="toggle" data-id="${item.id}">Toggle</button>
+            </td>
         `;
         //HOw would buttoon classed be called? Add to eventlistener?
         tblContainer.appendChild(tableRow);   
@@ -66,6 +69,33 @@ function deleteBook(id) {
         myLibrary.splice(bookIndex, 1);
         console.log(myLibrary);
         displayBook();
+    }
+}
+
+document.addEventListener("click", (event) => {
+    if(event.target.classList.contains("toggle")) {
+        console.log("toggle clicked");
+        console.log(event.target.dataset.id);
+        toggleStatus(event.target.dataset.id);
+    }
+});
+
+function toggleStatus(id) {
+    const bookIndex = myLibrary.findIndex(book => book.id === id);
+
+    if (bookIndex !== -1) {
+        myLibrary.forEach(item => {
+            if (item.read === "Yes") {
+                item.read = "No";
+                displayBook();
+                console.log(item.read);
+            }
+            else if (item.read === "No") {
+                item.read = "Yes";
+                displayBook();
+                console.log(item.read);
+            }
+        });
     }
 }
 
