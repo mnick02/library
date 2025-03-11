@@ -14,6 +14,11 @@ function Book (title, author, pages, read) {
 
 const container = document.querySelector("#container");
 
+function removeBook(rowID) {
+    const row = document.getElementById(rowID);
+    row.parentNode.removeChild(row);
+}
+
 function displayBook() {
     container.innerHTML = '';
     const tblContainer = document.querySelector("#tbl-container");
@@ -29,7 +34,9 @@ function displayBook() {
             <td>${item.author}</td>
             <td>${item.pages}</td>
             <td>${item.read}</td>
+            <td><button class="remove" data-id="${item.id}">Remove</button></td>
         `;
+        //HOw would buttoon classed be called? Add to eventlistener?
         tblContainer.appendChild(tableRow);   
     
     });
@@ -42,6 +49,24 @@ function addBookToLibrary (title, author, pages, read) {
     myLibrary.push(newBook);
     console.log(myLibrary);
     displayBook();
+}
+
+document.addEventListener("click", (event) => {
+    if(event.target.classList.contains("remove")) {
+        console.log("remove clicked");
+        console.log(event.target.dataset.id);
+        deleteBook(event.target.dataset.id);
+    }
+});
+
+function deleteBook(id) {
+    const bookIndex = myLibrary.findIndex(book => book.id === id);
+
+    if (bookIndex !== -1) {
+        myLibrary.splice(bookIndex, 1);
+        console.log(myLibrary);
+        displayBook();
+    }
 }
 
 const newBookBtn = document.getElementById("newBook");
