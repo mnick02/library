@@ -1,15 +1,14 @@
 const myLibrary = [];
 
-function Book (title, author, pages, read) {
-    if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+    
+    constructor(title, author, pages, read) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
 }
 
 const container = document.querySelector("#container");
@@ -25,12 +24,12 @@ function displayBook() {
     tblContainer.innerHTML = '';
 
     const bookRows = tblContainer.querySelectorAll("tr.book-row");
-    bookRows.forEach(row => row.remove);
+    bookRows.forEach(row => row.remove());
     myLibrary.forEach(item => {
         const tableRow = document.createElement("tr");
         tableRow.className = "book-row"
         tableRow.innerHTML = `
-            <td>${item.title}</th>
+            <td>${item.title}</td>
             <td>${item.author}</td>
             <td>${item.pages}</td>
             <td>${item.read}</td>
